@@ -42,7 +42,6 @@ def check_product?(array, n)
 end
 
 # Part 2
-
 def concatenate_words(w1, w2)
   # ADD YOUR CODE HERE
   return w1.strip() + " " + w2.strip()
