@@ -82,16 +82,25 @@ puts valid_parentheses?("(}") #returns false
 
 
 def longest_common_prefix(s)
+  sentinel =0;
   #take array and grab first element
   choppedString = s[0]
   #chop the string to find prefixes
   #if it is common and starts at the first index return, else
   #keep chopping till length of choppedString == 0
   loop do
-    if (s[1].index(choppedString) == 0 && s[2].index(choppedString) == 0)
-      return choppedString;
+    s.each do |key|
+      if(key.index(choppedString) == 0)
+        sentinel = sentinel+1
+      end
     end
+    #check sentinel to see if every position at the array has the valid substring
+    if(sentinel == s.length)
+      return choppedString
+    end
+    #chop the end and keep iterating
     choppedString.chop!
+    #once choppedString is empty, we have not found anything
     break if choppedString.length == 0
   end
   return ""
