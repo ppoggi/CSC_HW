@@ -50,13 +50,16 @@ end
 def valid_parentheses?(s)
   #get first
   first = s.chr
-  #get end
+  #get end of brace/bracket/parenthesis
   match = first.next
   #remove first
   s.gsub!(first,"")
   #break up string by the match
   parts = s.partition(match)
-
+  #tricky part
+  #iterate through each sub array until you end up with ["","*",""]
+  #["","*",""] means there are matching pairs for each where *
+  # is a closing bracket
   if(parts[0].length >1)
     valid_parentheses?(parts[0])
   end
@@ -80,7 +83,7 @@ puts valid_parentheses?("(}") #returns false
 
 def longest_common_prefix(s)
   #take array and grab first element
-  choppedString =s [0]
+  choppedString = s[0]
   #chop the string to find prefixes
   #if it is common and starts at the first index return, else
   #keep chopping till length of choppedString == 0
@@ -95,7 +98,6 @@ def longest_common_prefix(s)
 end
 
 # Part 3
-
 class Student
 # ADD YOUR CODE HERE
 
