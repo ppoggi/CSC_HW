@@ -48,9 +48,35 @@ def concatenate_words(w1, w2)
 end
 
 def valid_parentheses?(s)
-  # ADD YOUR CODE HERE
+  #get first
+  first = s.chr
+  #get end
+  match = first.next
+  #remove first
+  s.gsub!(first,"")
+  #break up string by the match
+  parts = s.partition(match)
 
+  if(parts[0].length >1)
+    valid_parentheses?(parts[0])
+  end
+  if(parts[2].length >1)
+    valid_parentheses?(parts[2])
+  end
+
+  if(parts[0] == "" && parts[1].length == 1 && parts[2] == "")
+    return true
+  end
+  return false
 end
+
+puts 'parenthesis'
+puts valid_parentheses?("()[]{}") #returns true
+puts valid_parentheses?("(()())") #returns true
+puts valid_parentheses?("(()([{}]))") #returns true
+puts valid_parentheses?("[[)([{}]))") #returns false
+puts valid_parentheses?("(}") #returns false
+
 
 def longest_common_prefix(s)
   #take array and grab first element
