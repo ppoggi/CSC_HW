@@ -88,7 +88,7 @@ def longest_common_prefix(s)
     if (s[1].index(choppedString) == 0 && s[2].index(choppedString) == 0)
       return choppedString;
     end
-    choppedString.chop
+    choppedString.chop!
     break if choppedString.length == 0
   end
   return ""
