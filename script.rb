@@ -73,14 +73,6 @@ def valid_parentheses?(s)
   return false
 end
 
-puts 'parenthesis'
-puts valid_parentheses?("()[]{}") #returns true
-puts valid_parentheses?("(()())") #returns true
-puts valid_parentheses?("(()([{}]))") #returns true
-puts valid_parentheses?("[[)([{}]))") #returns false
-puts valid_parentheses?("(}") #returns false
-
-
 def longest_common_prefix(s)
   sentinel =0;
   #take array and grab first element
@@ -108,6 +100,54 @@ end
 
 # Part 3
 class Student
-# ADD YOUR CODE HERE
+#@name
+#@arrival_time_at_classroom
+  attr_accessor :name, :arrival_time_at_classroom
 
+  def initialize(name, arrival_time_at_classroom)
+    unless name.is_a?(String)
+      raise ArgumentError.new("Name must be a string or not nil")
+    end
+
+    unless arrival_time_at_classroom.is_a?(String)
+      raise ArgumentError.new("arrival_time_at_classroom must be a string or not nil")
+    end
+
+    unless /[0-9][0-9]:[0-9][0-9] (a|p)m/.match(arrival_time_at_classroom) != nil
+      raise ArgumentError.new("Format must be hr:min meridian")
+    end
+
+    @name = name
+    @arrival_time_at_classroom = arrival_time_at_classroom
+  end
+
+  def arrive_on_time_for_class?
+      #"08:00 am"
+      onTime = 8.00#should be a constant
+      #get instance variable current time turn it into a float and break up
+      #the string into [time, meridian]
+      formattedArr = @arrival_time_at_classroom.gsub(":",".").partition(" ");
+      #change to float
+      arrivalTimeF = formattedArr[0].to_f
+      meridian = formattedArr[1]
+      #if meridian is pm, add 12 hours
+      if(meridian == "pm")
+        arrivalTimeF = arrivalTimeF + 12.0
+      end
+
+      if(arrivalTimeF > onTime)
+        return false
+      end
+      
+      if(/[0][0-9]:[0-5][0-9] (a|p)m/.match(arrival_time_at_classroom) != nil ||
+        /[1][1-2]:[0-5][0-9] (a|p)m/.match(arrival_time_at_classroom) != nil)
+        return false
+      end
+      return true
+  end
 end
+
+
+#puts /[0-9][0-9]:[0-9][0-9] (a|p)m/.match("8:12 pm").inspect
+#.strftime("%H:%M:%S:%p")
+#puts Time.new("03:14 pm").strftime("%Y-%m-%d %H:%M:%S")
