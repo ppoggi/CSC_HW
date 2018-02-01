@@ -113,7 +113,7 @@ class Student
       raise ArgumentError.new("arrival_time_at_classroom must be a string or not nil")
     end
 
-    unless /[0-9][0-9]:[0-9][0-9] (a|p)m/.match(arrival_time_at_classroom) != nil
+    unless /[0-1][0-5]:[0-5][0-9] (a|p)m/.match(arrival_time_at_classroom) != nil
       raise ArgumentError.new("Format must be hr:min meridian")
     end
 
@@ -138,7 +138,7 @@ class Student
       if(arrivalTimeF > onTime)
         return false
       end
-      
+
       if(/[0][0-9]:[0-5][0-9] (a|p)m/.match(arrival_time_at_classroom) != nil ||
         /[1][1-2]:[0-5][0-9] (a|p)m/.match(arrival_time_at_classroom) != nil)
         return false
